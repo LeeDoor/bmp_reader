@@ -45,7 +45,7 @@ BMP BMPReader::read_bit_map(BMPInfoHeader info_header) {
             color.blue = line[j * pixel_size];
             color.green = line[j * pixel_size + 1];
             color.red = line[j * pixel_size + 2];
-            bmp.redraw_pixel({i, j}, color);
+            bmp.redraw_pixel({info_header.height - i - 1, j}, color);
         }
     }
     delete[] line;

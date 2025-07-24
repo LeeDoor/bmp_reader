@@ -18,3 +18,10 @@ void BMP::redraw_pixel(Point position, Color new_color) {
         throw std::runtime_error("attempt to redraw outbound pixel");
     matrix_[position.x][position.y] = new_color;
 }
+
+void BMP::flip_pixel(Point position) {
+    if (height() <= position.x || width() <= position.y)
+        throw std::runtime_error("attempt to redraw outbound pixel");
+    if(matrix_[position.x][position.y] == WHITE) redraw_pixel(position, BLACK);
+    else redraw_pixel(position, WHITE);
+}

@@ -15,6 +15,7 @@ public:
 
     const MatrixType value() const;
     void redraw_pixel(Point position, Color new_color);
+    void flip_pixel(Point position);
 
 private:
     MatrixType matrix_;   

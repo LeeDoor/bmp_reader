@@ -1,7 +1,6 @@
 #include "bmp_drawer.hpp"
 #include <algorithm>
 #include <cstdlib>
-#include <iostream>
 
 BMPDrawer::BMPDrawer(BMP& bmp) 
     : bmp_{bmp} 

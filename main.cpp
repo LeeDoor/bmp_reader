@@ -54,7 +54,7 @@ int main() {
         printer.print_bmp(bmp);
         try_draw_X(bmp);
         printer.print_bmp(bmp);
-        // try_write_bmp(bmp);
+        try_write_bmp(bmp);
     } catch (const std::exception& ex) {
         std::cout << "Application failed: " << ex.what();
         return 1;

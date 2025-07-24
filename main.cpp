@@ -3,9 +3,31 @@
 #include <cassert>
 #include <iostream>
 
+BMP try_read_bmp() {
+    while (true) {
+        try {
+            std::string filename;
+            std::cout << ">> Enter input BMP file name: ";
+            std::cin >> filename;
+            BMPReader reader(filename);
+            BMP bmp = reader.read_from_file();
+            return bmp;
+        } catch (const std::exception& ex) {
+            std::cout 
+                << "Something went wrong: " << ex.what() 
+                << "\nPlease try again\n";    
+        }
+    }
+}
+
 int main() {
-    BMPReader reader("/home/leedoor/Desktop/plus.bmp");
-    auto a = reader.read_from_file();
-    BMPPrinter printer(std::cout);
-    printer.print_bmp(a);
+    try {
+        BMP bmp = try_read_bmp();
+        BMPPrinter printer(std::cout);
+        printer.print_bmp(bmp);
+    } catch (const std::exception& ex) {
+        std::cout << "Application failed: " << ex.what();
+        return 1;
+    }
+    return 0;
 }

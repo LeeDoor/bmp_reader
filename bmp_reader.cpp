@@ -4,6 +4,8 @@
 BMPReader::BMPReader(const std::string& filename) {
     if(std::filesystem::path(filename).extension() != ".bmp")
         throw std::runtime_error("provided file must be .bmp");
+    if(!std::filesystem::exists(filename) || std::filesystem::is_directory(filename))
+        throw std::runtime_error("no such file");
     ifs_.open(filename, std::ios::binary);
     if(!ifs_.is_open())
         throw std::runtime_error("unable to open file " + filename);

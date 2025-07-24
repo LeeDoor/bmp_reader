@@ -13,5 +13,11 @@ struct BMPInfoHeader {
     uint32_t height;
     uint16_t planes;
     uint16_t bit_count;
+    uint32_t compression;
+    uint32_t size_image;
+    uint32_t x_pels_per_meter;
+    uint32_t y_pels_per_meter;
+    uint32_t clr_used;
+    uint32_t clr_important;
 };
 #pragma pack(pop)

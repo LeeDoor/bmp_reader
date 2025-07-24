@@ -14,7 +14,7 @@ public:
 private:
     BMPFileHeader read_file_header();
     BMPInfoHeader read_info_header();
-    BMP read_bit_map(BMPInfoHeader info_header);
+    void fill_bit_map(BMP& bmp);
 
     std::ifstream ifs_;
 };

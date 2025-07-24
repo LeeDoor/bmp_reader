@@ -26,21 +26,21 @@ public:
     static Point read_point_in_area(Point topleft, Point bottomright) {
         if(topleft.x > bottomright.x || topleft.y > bottomright.y)
             throw std::logic_error("illegal area input in read_point_in_area");
-        Point result;
+        Point point;
         std::cout << "Enter x in [" << topleft.x << "; " << bottomright.x << "]: ";
-        result.x = read_int(topleft.x, bottomright.x);
+        point.x = read_int(topleft.x, bottomright.x);
         std::cout << "Enter y in [" << topleft.y << "; " << bottomright.y << "]: ";
-        result.y = read_int(topleft.y, bottomright.y);
-        return result;
+        point.y = read_int(topleft.y, bottomright.y);
+        return point;
     }
     static Rectangle read_rectangle_in_area(Point topleft, Point bottomright) {
         if(topleft.x > bottomright.x || topleft.y > bottomright.y)
             throw std::logic_error("illegal area input in read_rectangle_in_area");
-        Rectangle line;
+        Rectangle rectangle;
         std::cout << "Entering top-left corner of area.\n";
-        line.a = read_point_in_area(topleft, bottomright);
+        rectangle.a = read_point_in_area(topleft, bottomright);
         std::cout << "Entering bottom-right corner of area.\n";
-        line.b = read_point_in_area(topleft, bottomright);
-        return line;
+        rectangle.b = read_point_in_area(topleft, bottomright);
+        return rectangle;
     }
 };

@@ -18,7 +18,9 @@ BMP BMPReader::read_from_file() {
     BMPFileHeader file_header = read_file_header();
     BMPInfoHeader info_header = read_info_header();
     ifs_.seekg(file_header.offset);
-    return read_bit_map(info_header);
+    BMP bmp{{file_header, info_header}, info_header.width, info_header.height};
+    fill_bit_map(bmp);
+    return bmp;
 }
 
 BMPFileHeader BMPReader::read_file_header() {
@@ -33,11 +35,11 @@ BMPInfoHeader BMPReader::read_info_header() {
     ifs_.read(reinterpret_cast<char*>(&info_header), sizeof(info_header));
     return info_header;
 }
-BMP BMPReader::read_bit_map(BMPInfoHeader info_header) {
-    BMP bmp{info_header.width, info_header.height, WHITE};
-    size_t pixel_size = info_header.bit_count / 8;
-    size_t line_size = pixel_size * info_header.width;
-    size_t line_size_offset = line_size + (4 - (line_size % 4)) % 4;
+void BMPReader::fill_bit_map(BMP& bmp) {
+    const auto& info_header = bmp.metadata().info_header;
+    const size_t pixel_size = info_header.bit_count / 8;
+    const size_t line_size = pixel_size * info_header.width;
+    const size_t line_size_offset = line_size + (4 - (line_size % 4)) % 4;
 
     char *line = new char[line_size_offset];
     for(size_t i = 0; i < info_header.height; ++i) {
@@ -47,9 +49,8 @@ BMP BMPReader::read_bit_map(BMPInfoHeader info_header) {
             color.blue = line[j * pixel_size];
             color.green = line[j * pixel_size + 1];
             color.red = line[j * pixel_size + 2];
-            bmp.redraw_pixel({info_header.height - i - 1, j}, color);
+            bmp.redraw_pixel({j, info_header.height - i - 1}, color);
         }
     }
     delete[] line;
-    return bmp;
 }

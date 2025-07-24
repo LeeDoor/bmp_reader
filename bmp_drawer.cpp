@@ -9,7 +9,7 @@ void BMPDrawer::draw_X(Rectangle rect) {
     auto to_flip = select_line(rect.a, rect.b);
     to_flip.merge(select_line({ rect.b.x, rect.a.y }, { rect.a.x, rect.b.y }));
     std::for_each(to_flip.begin(), to_flip.end(), [this](Point point) {
-        bmp_.flip_pixel(point);
+        bmp_.draw_pixel(point, BLACK);
     });
 }
 

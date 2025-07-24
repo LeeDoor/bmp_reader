@@ -17,8 +17,7 @@ public:
     const MatrixType& value() const &;
     const BMPMetadata& metadata() const &;
 
-    void redraw_pixel(Point position, Color new_color);
-    void flip_pixel(Point position);
+    void draw_pixel(Point position, Color new_color);
 
 private:
     BMPMetadata metadata_;

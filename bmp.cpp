@@ -19,15 +19,8 @@ const ::BMPMetadata& BMP::metadata() const & {
     return metadata_;
 }
 
-void BMP::redraw_pixel(Point position, Color new_color) {
+void BMP::draw_pixel(Point position, Color new_color) {
     if (width() <= position.x || height() <= position.y)
         throw std::runtime_error("attempt to redraw outbound pixel");
     matrix_[position.y][position.x] = new_color;
-}
-
-void BMP::flip_pixel(Point position) {
-    if (width() <= position.x || height() <= position.y)
-        throw std::runtime_error("attempt to flip outbound pixel");
-    if(matrix_[position.y][position.x] == WHITE) redraw_pixel(position, BLACK);
-    else redraw_pixel(position, WHITE);
 }
